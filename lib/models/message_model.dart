@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 class ChatMessageModel {
   final String text;
+  final File? image;
   final DateTime time;
   final bool isUser;
 
@@ -9,6 +11,7 @@ class ChatMessageModel {
     required this.text,
     required this.time,
     required this.isUser,
+     this.image,
   });
 
   Map<String, dynamic> toMap() {
@@ -16,6 +19,7 @@ class ChatMessageModel {
       'message': text,
       'time': time,
       'isUser': isUser,
+      'image': image,
     };
   }
 
@@ -24,6 +28,7 @@ class ChatMessageModel {
       text: map['message'] as String,
       time: map['time'] as DateTime,
       isUser: map['isUser'] as bool,
+      image: map['image'] as File,
     );
   }
 

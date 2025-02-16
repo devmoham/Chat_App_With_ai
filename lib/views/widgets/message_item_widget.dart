@@ -52,12 +52,26 @@ class MessageItemWidget extends StatelessWidget {
                                 : Radius.circular(25))),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: message.isUser
-                          ? Text(
-                              message.text,
-                              style: textStyle,
-                            )
-                          : AnimatedTextKit(
+                      child: message.isUser? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                           if (message.image != null)
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    child: Image.file(
+                                      message.image!,
+                                      height: 175,
+                                      width: double.infinity,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                const SizedBox(height: 8.0),
+                                Text(
+                                  message.text,
+                                  style: textStyle,
+                                ),
+                        ],
+                      ):AnimatedTextKit(
                               repeatForever: false,
                               totalRepeatCount: 1,
                               animatedTexts: [
@@ -66,7 +80,9 @@ class MessageItemWidget extends StatelessWidget {
                                   textStyle: textStyle,
                                 ),
                               ],
-                            ),
+                            ), 
+                          
+                         
                     ),
                   ),
                   Padding(
